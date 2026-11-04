@@ -4,272 +4,194 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Franco Belman — restricted.systems</title>
+  <meta name="description" content="Vulnerability research and exploit development by Franco Belman. Research, security advisories, and contact information." />
+  <meta property="og:title" content="Franco Belman — restricted.systems" />
+  <meta property="og:description" content="Vulnerability research and exploit development. Selected research and security advisories." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='32' y='42' fill='%23ededed' font-family='monospace' font-size='30' text-anchor='middle'%3Efb%3C/text%3E%3C/svg%3E" />
 <style>
-    :root{
-      --body-bg:
-        radial-gradient(circle at 22% 16%, rgba(166,192,212,.13), transparent 34%),
-        radial-gradient(circle at 78% 74%, rgba(112,153,183,.15), transparent 44%),
-        linear-gradient(155deg, #a9c0d1 0%, #a1bbce 24%, #97b4c8 56%, #8dabc0 100%);
-      --text:#142b3a;
-      --soft:#446477;
-      --muted:#5d7a8e;
-      --ghost:#52748a;
-      --header:#5f8093;
-      --heading:#112a39;
-      --copy:#4d697b;
-      --link:#3f5f72;
-      --link-hover:#0d202d;
-      --panel-a: rgba(197,215,227,0.18);
-      --panel-b: rgba(176,198,214,0.10);
-      --panel-glow: rgba(214,228,236,0.07);
-      --panel-border: rgba(20,43,58,0.002);
-      --panel-shadow: rgba(40,90,120,0.006);
-      --toggle-bg: rgba(210,226,236,0.26);
-      --toggle-border: rgba(20,43,58,0.10);
-      --toggle-shadow: rgba(40,90,120,0.035);
-      --toggle-pill: rgba(245,250,252,0.54);
-      --toggle-pill-active: rgba(255,255,255,0.72);
-      --toggle-text:#466375;
-      --toggle-text-active:#132c3b;
-
-
-
-      --selection: rgba(255,255,255,0.14);
+    :root {
+      color-scheme: light;
+      --body-bg: #afc5d4;
+      --text: #162e3e;
+      --heading: #102937;
+      --copy: #3c5769;
+      --muted: #496476;
+      --ghost: #486476;
+      --link: #213e50;
+      --link-hover: #081e2b;
+      --line: rgba(20, 43, 58, .17);
+      --subtle-line: rgba(20, 43, 58, .10);
+      --tag-bg: rgba(222, 236, 245, .20);
+      --control-bg: rgba(230, 242, 248, .42);
+      --selection: rgba(255, 255, 255, .5);
+      --panel-a: rgba(197, 215, 227, .18);
+      --panel-b: rgba(176, 198, 214, .10);
+      --panel-border: rgba(20, 43, 58, .002);
     }
-    body[data-theme="dark"]{
-      --body-bg:#0a0a0a;
-      --text:#e0e0e0;
-      --soft:#777;
-      --muted:#979797;
-      --ghost:#696969;
-      --header:#686868;
-      --heading:#e3e3e3;
-      --copy:#929292;
-      --link:#aaa;
-      --link-hover:#e0e0e0;
-      --panel-a: rgba(255,255,255,0.013);
-      --panel-b: rgba(255,255,255,0.004);
-      --panel-glow: rgba(255,255,255,0.018);
-      --panel-border: rgba(255,255,255,0.003);
-      --panel-shadow: rgba(0,0,0,0.07);
-      --toggle-bg: rgba(12,12,12,0.42);
-      --toggle-border: rgba(255,255,255,0.07);
-      --toggle-shadow: rgba(0,0,0,0.24);
-      --toggle-pill: rgba(255,255,255,0.025);
-      --toggle-pill-active: rgba(255,255,255,0.065);
-      --toggle-text:#555;
-      --toggle-text-active:#e0e0e0;
-
-
-
-      --selection: rgba(255,255,255,0.10);
+    body[data-theme="dark"] {
+      color-scheme: dark;
+      --body-bg: #0a0a0a;
+      --text: #d5d7da;
+      --heading: #ededed;
+      --copy: #a0a3a9;
+      --muted: #a3a6ad;
+      --ghost: #92969e;
+      --link: #d5d7db;
+      --link-hover: #fff;
+      --line: rgba(255, 255, 255, .15);
+      --subtle-line: rgba(255, 255, 255, .085);
+      --tag-bg: rgba(255, 255, 255, .035);
+      --control-bg: rgba(255, 255, 255, .09);
+      --selection: rgba(182, 204, 226, .23);
+      --panel-a: rgba(255, 255, 255, .013);
+      --panel-b: rgba(255, 255, 255, .004);
+      --panel-border: rgba(255, 255, 255, .003);
     }
-
-    @media (prefers-reduced-motion: reduce){
-      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+    html { min-width: 320px; }
+    body {
+      background: var(--body-bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color .24s ease, color .24s ease;
     }
-
-    body[data-theme="dark"] .theme-btn{opacity:.95}
-    body[data-theme="dark"] .theme-btn:hover{opacity:1}
-    body[data-theme="dark"] .theme-btn.active{opacity:1}
-    body[data-theme="dark"] .theme-glyph{color:var(--recon-welcome)}
-    body[data-theme="dark"] .theme-btn.active .theme-glyph{color:var(--recon-welcome)}
-
-    *{ margin:0; padding:0; box-sizing:border-box; }
-    body{
-      background:var(--body-bg);
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
-      font-synthesis:none;
-      min-height:100%;
-      overflow-x:hidden;
-      overflow-y:auto;
-      -webkit-overflow-scrolling:touch;
-      -webkit-font-smoothing:antialiased;
-      transition:background .28s ease, color .22s ease;
+    ::selection { background: var(--selection); }
+    button, table { font: inherit; }
+    a { color: var(--link); text-decoration: none; transition: color .18s ease; }
+    a:hover { color: var(--link-hover); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--link-hover);
+      outline-offset: 5px;
+      border-radius: 2px;
     }
-    html,body,button,table,input,textarea{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-synthesis:none}
-    .advisory-table,.advisory-table th,.advisory-table td,.advisory-table a,.vendor-name,.advisory-cve,.advisory-component,.advisory-type{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;font-style:normal}
-
-    ::selection{ background:var(--selection); }
-
-    canvas{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      z-index:0;
+    canvas {
+      position: absolute; inset: 0; width: 100%; height: min(100svh, 900px); z-index: 0;
+      pointer-events: none;
+      opacity: .7;
+      mask-image: linear-gradient(to right, transparent 24%, rgba(0,0,0,.05) 48%, #000 78%);
+      -webkit-mask-image: linear-gradient(to right, transparent 24%, rgba(0,0,0,.05) 48%, #000 78%);
     }
-
-    .content{
-      position:relative;
-      z-index:1;
-      min-height:100vh;
-      min-height:100svh;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-      padding:3rem;
-      padding-bottom:4rem;
+    body[data-theme="light"] canvas { opacity: .58; }
+    body[data-theme="dark"] canvas {
+      position: fixed;
+      height: 100%;
+      opacity: 1;
+      mask-image: none;
+      -webkit-mask-image: none;
     }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      gap:.9rem;
-      flex-wrap:wrap;
+    .content {
+      position: relative; z-index: 1;
+      max-width: 1400px; margin-inline: auto;
+      padding: 36px clamp(24px, 5vw, 72px) 32px;
     }
-
-    header{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
-      font-size:0.7rem;
-      letter-spacing:0.15em;
-      text-transform:uppercase;
-      color:var(--header);
-      transition:color .22s ease;
+    .topbar { display: flex; align-items: center; justify-content: flex-end; gap: 24px; margin-bottom: 58px; }
+    .theme-toggle { display: flex; align-items: center; gap: 4px; }
+    .theme-btn {
+      appearance: none; border: 1px solid transparent; background: transparent;
+      color: var(--ghost); cursor: pointer; border-radius: 5px;
+      width: 36px; height: 36px; display: grid; place-items: center;
+      transition: color .18s ease, background-color .18s ease;
     }
-
-    main{ width:100%; max-width:1080px; }
-
-    .panel-stack{display:flex;flex-direction:column;align-items:flex-start;gap:.66rem;margin-left:0}
-
-    .panel-card{position:relative;display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;width:max-content;max-width:min(100%,60rem);margin-left:-.48rem;padding:.34rem .48rem .38rem .48rem;border-radius:5px;vertical-align:top;text-align:left;line-height:1.15}
-    .panel-card::before{content:'';position:absolute;inset:-.015rem;z-index:-1;border-radius:5px;background:linear-gradient(135deg,var(--panel-a),var(--panel-b));border:1px solid var(--panel-border);box-shadow:none;backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);transition:background .22s ease,border-color .22s ease;pointer-events:none}
-    .panel-hero{padding:0;max-width:min(100%,33rem)}
-
-    h1{
-      font-size:clamp(2rem, 5vw, 3.2rem);
-      font-weight:400;
-      letter-spacing:-0.055em;
-      line-height:1.15;
-      margin-bottom:1.5rem;
-      color:var(--heading);
-      transition:color .22s ease;
+    .theme-btn:hover { background: var(--tag-bg); color: var(--heading); }
+    .theme-btn.active { background: var(--control-bg); color: var(--heading); border-color: var(--subtle-line); }
+    .theme-glyph { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; }
+    main { width: 100%; max-width: 980px; }
+    .panel-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+    .panel-hero { max-width: 640px; }
+    h1 { color: var(--heading); font-size: clamp(48px, 5.2vw, 68px); font-weight: 400; letter-spacing: -.055em; line-height: 1.04; margin-bottom: 24px; }
+    .panel-hero > p { color: var(--copy); font-size: 17px; line-height: 1.6; letter-spacing: -.018em; }
+    .profile-meta { display: flex; flex-wrap: wrap; gap: 24px 48px; margin-top: 30px; }
+    .section-title { color: var(--ghost); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; }
+    .profile-meta .panel-card { width: auto; }
+    .profile-meta .section-title { font-size: 10px; margin-bottom: 9px; }
+    .links { display: flex; align-items: center; gap: 20px; }
+    .profile-meta a { font-size: 13px; line-height: 1.6; }
+    .profile-meta a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .panel-card { position: relative; width: 100%; }
+    .panel-card::before {
+      content: '';
+      position: absolute;
+      inset: -.38rem -.48rem;
+      z-index: -1;
+      border-radius: 5px;
+      background: linear-gradient(135deg, var(--panel-a), var(--panel-b));
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(1.5px);
+      -webkit-backdrop-filter: blur(1.5px);
+      transition: background .22s ease, border-color .22s ease;
+      pointer-events: none;
     }
-
-    p{color:var(--copy);font-size:1.02rem;font-weight:400;line-height:1.5;letter-spacing:-0.015em;transition:color .22s ease}
-
-    .section-title{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ghost);margin-bottom:.32rem;line-height:1.15;text-align:left;transition:color .22s ease}
-
-    .research-link{color:var(--link);font-size:.86rem;font-weight:400;display:block;line-height:1.42;letter-spacing:-0.012em;text-align:left;transition:color .22s ease}
-
-
-    .advisories{width:min(100%,49rem)}
-    .advisory-table{width:100%;margin-top:.3rem;border-collapse:collapse;table-layout:fixed}
-    .advisory-table col.vendor{width:19%}
-    .advisory-table col.cve{width:24%}
-    .advisory-table col.component{width:30%}
-    .advisory-table col.class{width:27%}
-    .advisory-table th{padding:.14rem .42rem .34rem;border-bottom:1px solid rgba(128,150,165,.14);font-size:.59rem;font-weight:400;letter-spacing:.13em;text-transform:uppercase;color:var(--ghost);text-align:left;white-space:nowrap}
-    .advisory-table td{padding:.44rem .42rem;border-bottom:1px solid rgba(128,150,165,.11);font-size:.8rem;line-height:1.28;vertical-align:middle;text-align:left}
-    .advisory-table th:first-child,.advisory-table td:first-child{padding-left:0}
-    .advisory-table th:last-child,.advisory-table td:last-child{padding-right:0}
-    .advisory-table tbody tr:last-child td{border-bottom:0}
-    .advisory-table a{display:block;color:inherit}
-    .advisory-vendor-col{display:flex;align-items:center;gap:.58rem;min-width:0;color:var(--text)}
-    .vendor-logo{display:inline-flex;align-items:center;justify-content:center;width:1.05rem;height:1.05rem;flex:0 0 1.05rem;color:var(--heading);opacity:.92}
-    .vendor-logo svg{display:block;width:100%;height:100%;fill:currentColor;stroke:currentColor}
-    .vendor-name{font-size:.75rem;font-weight:400;letter-spacing:.01em;color:var(--heading);white-space:nowrap}
-    .advisory-cve{color:var(--heading);font-weight:400;white-space:nowrap}
-    .advisory-component{color:var(--copy);overflow-wrap:anywhere}
-    .advisory-type{color:var(--muted);font-size:.66rem;font-weight:400;letter-spacing:.025em;text-transform:uppercase;white-space:nowrap}
-    .advisory-table tbody tr:hover .advisory-cve,.advisory-table tbody tr:hover .advisory-type,.advisory-table tbody tr:hover .vendor-name{color:var(--link-hover)}
-
-    .research-section{max-width:min(100%,44rem)}
-    .research-item{max-width:40rem}
-    .research-item + .research-item{margin-top:.83rem}
-    .research-description{max-width:39rem;margin-top:.20rem;color:var(--copy);font-size:.77rem;line-height:1.52;letter-spacing:0}
-    .research-tags{display:flex;flex-wrap:wrap;gap:.32rem;margin-top:.42rem}
-    .research-tag{display:inline-block;padding:.17rem .34rem;border:1px solid rgba(128,150,165,.20);border-radius:2px;color:var(--muted);font-size:.59rem;font-weight:400;line-height:1.2;letter-spacing:.025em;white-space:nowrap}
-    .research-video-link{display:inline-block;margin-top:.44rem;color:var(--link);font-size:.68rem;line-height:1.4;letter-spacing:.01em;text-decoration:underline;text-decoration-color:rgba(128,150,165,.35);text-underline-offset:3px}
-    .research-video-link:hover{color:var(--link-hover);text-decoration-color:currentColor}
-    a:focus-visible, button:focus-visible{outline:1px solid var(--link-hover);outline-offset:4px}
-
-    .links{display:flex;align-items:center;gap:1rem;font-size:.86rem;font-weight:400;line-height:1.42;letter-spacing:-0.012em;text-align:left}
-
-    a{
-      color:var(--muted);
-      text-decoration:none;
-      transition:color .3s ease;
+    .research-section { max-width: 640px; margin-top: 56px; }
+    .research-section > .section-title { margin-bottom: 24px; }
+    .research-item + .research-item { border-top: 1px solid var(--subtle-line); padding-top: 25px; margin-top: 26px; }
+    .research-item h3 { font-size: 17px; font-weight: 500; line-height: 1.45; letter-spacing: -.022em; }
+    .research-description { max-width: 610px; margin-top: 9px; color: var(--copy); font-size: 14px; line-height: 1.7; }
+    .research-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .research-tag { padding: 4px 7px; border: 1px solid var(--subtle-line); border-radius: 3px; background: var(--tag-bg); color: var(--muted); font-size: 10px; line-height: 1.2; }
+    .research-video-link { display: inline-block; margin-top: 15px; font-size: 12px; line-height: 1.5; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+    .research-video-link:hover { text-decoration-color: currentColor; }
+    .advisories { margin-top: 55px; max-width: 940px; }
+    .advisories > .section-title { margin-bottom: 20px; }
+    .advisory-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .advisory-table col.vendor { width: 15%; }
+    .advisory-table col.cve { width: 24%; }
+    .advisory-table col.component { width: 33%; }
+    .advisory-table col.class { width: 28%; }
+    .advisory-table th { padding: 0 12px 13px; border-bottom: 1px solid var(--line); color: var(--ghost); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-align: left; text-transform: uppercase; }
+    .advisory-table td { padding: 14px 12px; border-bottom: 1px solid var(--subtle-line); font-size: 12px; line-height: 1.45; vertical-align: middle; text-align: left; }
+    .advisory-table th:first-child, .advisory-table td:first-child { padding-left: 0; }
+    .advisory-table th:last-child, .advisory-table td:last-child { padding-right: 0; }
+    .advisory-table tbody tr:last-child td { border-bottom: 0; }
+    .advisory-table tbody tr { transition: background-color .18s ease; }
+    .advisory-table tbody tr:hover { background: var(--tag-bg); }
+    .advisory-vendor-col { display: flex; align-items: center; gap: 9px; }
+    .vendor-logo { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; flex: 0 0 16px; color: var(--copy); }
+    .vendor-logo svg { display: block; width: 100%; height: 100%; fill: currentColor; stroke: currentColor; }
+    .vendor-name { color: var(--text); white-space: nowrap; }
+    .advisory-cve { color: var(--text); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .advisory-component { color: var(--copy); overflow-wrap: anywhere; }
+    .advisory-type { color: var(--muted); font-size: 10px; letter-spacing: .015em; text-transform: uppercase; }
+    .advisory-table a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    @media (max-width: 700px) {
+      .content { padding: 22px 24px 28px; }
+      .topbar { margin-bottom: 43px; }
+      .panel-hero > p { font-size: 16px; max-width: 330px; }
+      .profile-meta { gap: 24px 36px; margin-top: 27px; }
+      .research-section { margin-top: 43px; }
+      .research-item h3 { font-size: 16px; }
+      .research-description { font-size: 14px; }
+      .research-section > .section-title { margin-bottom: 20px; }
+      .advisories { margin-top: 43px; }
+      .advisory-table, .advisory-table tbody { display: block; width: 100%; }
+      .advisory-table colgroup, .advisory-table thead { display: none; }
+      .advisory-table tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 12px; padding: 17px 0; border-bottom: 1px solid var(--subtle-line); }
+      .advisory-table td { padding: 0; border: 0; min-width: 0; }
+      .advisory-table td:nth-child(2) { text-align: right; }
+      .advisory-table td:nth-child(3), .advisory-table td:nth-child(4) { grid-column: 1 / -1; }
+      .advisory-table tbody tr:last-child { border-bottom: 0; }
+      .advisory-component { font-size: 12px; }
+      .advisory-type { font-size: 10px; }
+      canvas, body[data-theme="light"] canvas { opacity: .18; }
     }
-    a:hover,
-    .research-link:hover{
-      color:var(--link-hover);
-    }
-
-    .theme-toggle{display:inline-flex;align-items:center;gap:.46rem;padding:0;margin:0;background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;border-radius:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;line-height:1}
-    .theme-btn{appearance:none;border:0!important;background:transparent!important;padding:0!important;margin:0!important;border-radius:0!important;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:none!important;outline:0!important;line-height:1;opacity:.55;transition:opacity .18s ease}
-    .theme-btn:hover{opacity:.78}
-    .theme-btn.active{background:transparent!important;opacity:1;box-shadow:none!important;transform:none}
-    .theme-glyph{
-      display:inline-block;
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
-      font-size:.62rem;
-      line-height:1;
-      letter-spacing:0;
-      color:var(--header);
-      opacity:.62;
-      transform:translateY(.02rem);
-      transition:opacity .18s ease,color .18s ease,text-shadow .18s ease;
-    }
-    .theme-btn.active .theme-glyph{
-      opacity:.95;
-      color:var(--header);
-      text-shadow:0 0 8px rgba(120,160,185,.10);
-    }
-
-
-
-
-    footer{ min-height:1px; }
-
-    @media (max-width:600px){
-      .content{min-height:100svh;padding:1.35rem 1.1rem 2.5rem}
-      .topbar{ gap:.65rem; }
-      .panel-stack{width:100%;gap:.72rem;margin-left:0}
-      .panel-card{
-        width:100%;
-        max-width:100%;
-        margin-left:0;
-        padding:.74rem .8rem .78rem .76rem;
-      }
-      .panel-hero{
-        width:100%;
-        max-width:100%;
-        padding:.84rem .86rem .88rem .78rem;
-      }
-      .research-section{width:100%;max-width:100%}
-      .research-item{max-width:100%}
-      .research-description{font-size:.80rem;line-height:1.48}
-      .advisories{width:100%;max-width:100%}
-      .advisory-table,.advisory-table tbody,.advisory-table tr,.advisory-table td{display:block;width:100%}
-      .advisory-table colgroup,.advisory-table thead{display:none}
-      .advisory-table tr{display:grid;grid-template-columns:1fr auto;gap:.14rem .7rem;padding:.48rem 0;border-bottom:1px solid rgba(128,150,165,.11)}
-      .advisory-table tbody tr:last-child{border-bottom:0}
-      .advisory-table td{padding:0;border:0}
-      .advisory-table td:nth-child(1){grid-column:1 / 2}
-      .advisory-table td:nth-child(2){grid-column:2 / 3;text-align:right}
-      .advisory-table td:nth-child(3),.advisory-table td:nth-child(4){grid-column:1 / -1}
-      .advisory-cve{font-size:.76rem}
-      .advisory-component{font-size:.77rem}
-      .advisory-type{font-size:.63rem;white-space:normal;line-height:1.35}
-      .advisory-component{overflow-wrap:anywhere;word-break:break-word}
-
-      .theme-btn{padding:0}
-      .theme-glyph{font-size:.58rem}
-
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
 <body data-theme="dark">
-  <canvas id="bg"></canvas>
+  <canvas id="bg" aria-hidden="true"></canvas>
 
   <div class="content">
     <div class="topbar">
-      <header></header>
-      <div class="theme-toggle" aria-label="Theme switcher">
-        <button class="theme-btn active" id="themeDark" type="button" aria-pressed="true" aria-label="Dark theme"><span class="theme-glyph">0</span></button>
-        <button class="theme-btn" id="themeLight" type="button" aria-pressed="false" aria-label="Light theme"><span class="theme-glyph">1</span></button>
+      
+      <div class="theme-toggle" role="group" aria-label="Theme switcher">
+        <button class="theme-btn active" id="themeDark" type="button" aria-pressed="true" aria-label="Dark theme" title="Dark theme"><span class="theme-glyph">0</span></button>
+        <button class="theme-btn" id="themeLight" type="button" aria-pressed="false" aria-label="Light theme" title="Light theme"><span class="theme-glyph">1</span></button>
       </div>
     </div>
 
@@ -280,8 +202,9 @@
           <p><span class="hero-tagline-pill">Vulnerability research and exploit development</span></p>
         </section>
 
+        <div class="profile-meta">
         <section class="panel-card">
-          <div class="section-title">Contact</div>
+          <h2 class="section-title">Contact</h2>
           <nav class="links">
             <a href="mailto:franco@restricted.systems">E-Mail</a>
             <a href="https://x.com/0xFBFBFBFB">X</a>
@@ -289,29 +212,31 @@
         </section>
 
         <section class="panel-card">
-          <div class="section-title">Company</div>
+          <h2 class="section-title">Company</h2>
           <a href="https://blackwinghq.com" class="research-link">Blackwing Intelligence</a>
         </section>
 
+        </div>
+
         <section class="panel-card research-section">
-          <div class="section-title">Research</div>
+          <h2 class="section-title">Research</h2>
           <div class="research-item">
-            <a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm" class="research-link">Persistent Remote DoS in Wire iOS</a>
+            <h3><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm" class="research-link">Persistent Remote DoS in Wire iOS</a></h3>
             <p class="research-description">A single crafted message can remotely trap Wire in a crash loop without any recipient interaction. Reinstalling to recover can permanently erase unbacked-up conversation history.</p>
             <div class="research-tags" aria-label="Research topics"><span class="research-tag">iOS App</span><span class="research-tag">Integer Underflow</span><span class="research-tag">Remote DoS</span></div>
-            <a class="research-video-link" href="https://x.com/0xFBFBFBFB/status/2108666595531018267" target="_blank" rel="noopener noreferrer" aria-label="Watch the Wire iOS vulnerability demonstration video on X">Watch demo ↗</a>
+            <a class="research-video-link" href="https://x.com/0xFBFBFBFB/status/2108666595531018267" target="_blank" rel="noopener noreferrer" aria-label="Watch the Wire iOS vulnerability demonstration video on X">Watch demo</a>
           </div>
           <div class="research-item">
-            <a href="https://blackwinghq.com/blog/posts/finding-vulnerability-variants-at-scale/" class="research-link">Finding Vulnerability Variants at Scale</a>
+            <h3><a href="https://blackwinghq.com/blog/posts/finding-vulnerability-variants-at-scale/" class="research-link">Finding Vulnerability Variants at Scale</a></h3>
             <p class="research-description">Fuzzing and variant analysis uncovering memory corruption vulnerabilities across more than 40 software projects.</p>
             <div class="research-tags" aria-label="Research topics"><span class="research-tag">Fuzzing</span><span class="research-tag">CodeQL</span><span class="research-tag">Memory Corruption</span></div>
           </div>
         </section>
 
         <section class="panel-card advisories">
-          <div class="section-title">Advisories</div>
+          <h2 class="section-title">Advisories</h2>
 
-          <table class="advisory-table">
+          <table class="advisory-table" aria-label="Security advisories">
             <colgroup>
               <col class="vendor">
               <col class="cve">
@@ -328,70 +253,70 @@
             </thead>
             <tbody>
               <tr>
-                <td><a href="https://support.apple.com/en-us/128067"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-cve">CVE-2026-64747</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-component">AppleAVE2</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-type">Kernel Controlled Write</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64747,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64747 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64747,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64747 credit for Franco Belman" class="advisory-cve">CVE-2026-64747</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64747,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64747 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleAVE2</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64747,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64747 credit for Franco Belman" class="advisory-type">Kernel Controlled Write</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/148287"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/148287" class="advisory-cve">CVE-2026-64760</a></td>
-                <td><a href="https://support.apple.com/en-us/148287" class="advisory-component">AppleM2ScalerCSCDriver</a></td>
-                <td><a href="https://support.apple.com/en-us/148287" class="advisory-type">Kernel Information Leak</a></td>
+                <td><a href="https://support.apple.com/en-us/148287#:~:text=CVE%2D2026%2D64760,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64760 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/148287#:~:text=CVE%2D2026%2D64760,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64760 credit for Franco Belman" class="advisory-cve">CVE-2026-64760</a></td>
+                <td><a href="https://support.apple.com/en-us/148287#:~:text=CVE%2D2026%2D64760,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64760 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleM2ScalerCSCDriver</a></td>
+                <td><a href="https://support.apple.com/en-us/148287#:~:text=CVE%2D2026%2D64760,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64760 credit for Franco Belman" class="advisory-type">Kernel Information Leak</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/128067"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-cve">CVE-2026-64762</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-component">AppleAVE2</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-type">Kernel OOB Read</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64762,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64762 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64762,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64762 credit for Franco Belman" class="advisory-cve">CVE-2026-64762</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64762,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64762 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleAVE2</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D64762,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-64762 credit for Franco Belman" class="advisory-type">Kernel OOB Read</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/128067"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-cve">CVE-2026-43748</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-component">AppleH11ANEInterface</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-type">Kernel OOB Write</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43748,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43748 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43748,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43748 credit for Franco Belman" class="advisory-cve">CVE-2026-43748</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43748,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43748 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleH11ANEInterface</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43748,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43748 credit for Franco Belman" class="advisory-type">Kernel OOB Write</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/128067"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-cve">CVE-2026-43816</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-component">AppleJPEGDriver</a></td>
-                <td><a href="https://support.apple.com/en-us/128067" class="advisory-type">Kernel OOB Write</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43816,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43816 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43816,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43816 credit for Franco Belman" class="advisory-cve">CVE-2026-43816</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43816,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43816 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleJPEGDriver</a></td>
+                <td><a href="https://support.apple.com/en-us/128067#:~:text=CVE%2D2026%2D43816,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-43816 credit for Franco Belman" class="advisory-type">Kernel OOB Write</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/128066"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/128066" class="advisory-cve">CVE-2026-65407</a></td>
-                <td><a href="https://support.apple.com/en-us/128066" class="advisory-component">AppleAVD</a></td>
-                <td><a href="https://support.apple.com/en-us/128066" class="advisory-type">Kernel Use After Free</a></td>
+                <td><a href="https://support.apple.com/en-us/128066#:~:text=CVE%2D2026%2D65407,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-65407 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/128066#:~:text=CVE%2D2026%2D65407,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-65407 credit for Franco Belman" class="advisory-cve">CVE-2026-65407</a></td>
+                <td><a href="https://support.apple.com/en-us/128066#:~:text=CVE%2D2026%2D65407,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-65407 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleAVD</a></td>
+                <td><a href="https://support.apple.com/en-us/128066#:~:text=CVE%2D2026%2D65407,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-65407 credit for Franco Belman" class="advisory-type">Kernel Use After Free</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/149038"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/149038" class="advisory-cve">CVE-2026-84532</a></td>
-                <td><a href="https://support.apple.com/en-us/149038" class="advisory-component">RealityKit</a></td>
-                <td><a href="https://support.apple.com/en-us/149038" class="advisory-type">Process OOB Read</a></td>
+                <td><a href="https://support.apple.com/en-us/149038#:~:text=CVE%2D2026%2D84532,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-84532 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/149038#:~:text=CVE%2D2026%2D84532,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-84532 credit for Franco Belman" class="advisory-cve">CVE-2026-84532</a></td>
+                <td><a href="https://support.apple.com/en-us/149038#:~:text=CVE%2D2026%2D84532,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-84532 credit for Franco Belman" class="advisory-component">com.apple.RealityKit</a></td>
+                <td><a href="https://support.apple.com/en-us/149038#:~:text=CVE%2D2026%2D84532,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-84532 credit for Franco Belman" class="advisory-type">Process OOB Read</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/149521"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/149521" class="advisory-cve">CVE-2026-112668</a></td>
-                <td><a href="https://support.apple.com/en-us/149521" class="advisory-component">Security</a></td>
-                <td><a href="https://support.apple.com/en-us/149521" class="advisory-type">Root Privilege Escalation</a></td>
+                <td><a href="https://support.apple.com/en-us/149521#:~:text=CVE%2D2026%2D112668,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112668 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/149521#:~:text=CVE%2D2026%2D112668,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112668 credit for Franco Belman" class="advisory-cve">CVE-2026-112668</a></td>
+                <td><a href="https://support.apple.com/en-us/149521#:~:text=CVE%2D2026%2D112668,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112668 credit for Franco Belman" class="advisory-component">Security</a></td>
+                <td><a href="https://support.apple.com/en-us/149521#:~:text=CVE%2D2026%2D112668,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112668 credit for Franco Belman" class="advisory-type">Root Privilege Escalation</a></td>
               </tr>
               <tr>
-                <td><a href="https://support.apple.com/en-us/149230"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
-                <td><a href="https://support.apple.com/en-us/149230" class="advisory-cve">CVE-2026-112689</a></td>
-                <td><a href="https://support.apple.com/en-us/149230" class="advisory-component">AppleAVE2</a></td>
-                <td><a href="https://support.apple.com/en-us/149230" class="advisory-type">Kernel OOB Write</a></td>
+                <td><a href="https://support.apple.com/en-us/149230#:~:text=CVE%2D2026%2D112689,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112689 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M16.8 12.7c0-2.1 1.7-3.1 1.8-3.2-1-.9-2.4-1-2.9-1-.8-.1-1.8.5-2.3.5-.6 0-1.4-.5-2.2-.5-1.2 0-2.2.7-2.8 1.7-1.2 2-.3 5 1 6.9.6.9 1.3 1.9 2.3 1.8.9 0 1.3-.5 2.4-.5s1.5.5 2.4.5c1 0 1.7-.9 2.3-1.8.7-1 1-2.1 1-2.1-.1 0-3-.9-3-3.3zm-1.8-5.4c.5-.6.9-1.4.8-2.3-.8 0-1.6.5-2.2 1.1-.5.5-.9 1.4-.8 2.2.9.1 1.7-.4 2.2-1z"></path></svg></span><span class="vendor-name">Apple</span></span></a></td>
+                <td><a href="https://support.apple.com/en-us/149230#:~:text=CVE%2D2026%2D112689,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112689 credit for Franco Belman" class="advisory-cve">CVE-2026-112689</a></td>
+                <td><a href="https://support.apple.com/en-us/149230#:~:text=CVE%2D2026%2D112689,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112689 credit for Franco Belman" class="advisory-component">com.apple.driver.<wbr>AppleAVE2</a></td>
+                <td><a href="https://support.apple.com/en-us/149230#:~:text=CVE%2D2026%2D112689,Franco%20Belman%20at%20Blackwing%20Intelligence" title="View the CVE-2026-112689 credit for Franco Belman" class="advisory-type">Kernel OOB Write</a></td>
               </tr>
               <tr>
-                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><rect x="3" y="3" width="18" height="18" rx="4" ry="4" fill="none" stroke-width="1.6"></rect><path d="M7 8l1.9 8 3.1-5 3.1 5 1.9-8" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="vendor-name">Wire</span></span></a></td>
-                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm" class="advisory-cve">CVE-2026-35049</a></td>
-                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm" class="advisory-component">Wire iOS</a></td>
-                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm" class="advisory-type">Persistent Remote DoS</a></td>
+                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm#:~:text=francobel" title="View the CVE-2026-35049 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><rect x="3" y="3" width="18" height="18" rx="4" ry="4" fill="none" stroke-width="1.6"></rect><path d="M7 8l1.9 8 3.1-5 3.1 5 1.9-8" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="vendor-name">Wire</span></span></a></td>
+                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm#:~:text=francobel" title="View the CVE-2026-35049 credit for Franco Belman" class="advisory-cve">CVE-2026-35049</a></td>
+                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm#:~:text=francobel" title="View the CVE-2026-35049 credit for Franco Belman" class="advisory-component">Wire iOS</a></td>
+                <td><a href="https://github.com/BlackwingHQ/security-research/security/advisories/GHSA-ccp4-r8g5-4vqm#:~:text=francobel" title="View the CVE-2026-35049 credit for Franco Belman" class="advisory-type">Persistent Remote DoS</a></td>
               </tr>
               <tr>
-                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3"></ellipse><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3" transform="rotate(120 12 12)"></ellipse><circle cx="12" cy="12" r="1.6"></circle></svg></span><span class="vendor-name">Electron</span></span></a></td>
-                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489" class="advisory-cve">CVE-2024-46993</a></td>
-                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489" class="advisory-component">Electron</a></td>
-                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489" class="advisory-type">Heap Overflow</a></td>
+                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489#:~:text=francobel" title="View the CVE-2024-46993 credit for Franco Belman"><span class="advisory-vendor-col"><span class="vendor-logo" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3"></ellipse><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="8.2" ry="3.9" fill="none" stroke-width="1.3" transform="rotate(120 12 12)"></ellipse><circle cx="12" cy="12" r="1.6"></circle></svg></span><span class="vendor-name">Electron</span></span></a></td>
+                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489#:~:text=francobel" title="View the CVE-2024-46993 credit for Franco Belman" class="advisory-cve">CVE-2024-46993</a></td>
+                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489#:~:text=francobel" title="View the CVE-2024-46993 credit for Franco Belman" class="advisory-component">Electron</a></td>
+                <td><a href="https://github.com/advisories/GHSA-6r2x-8pq8-9489#:~:text=francobel" title="View the CVE-2024-46993 credit for Franco Belman" class="advisory-type">Heap Overflow</a></td>
               </tr>
             </tbody>
           </table>
@@ -399,7 +324,7 @@
       </div>
     </main>
 
-    <footer></footer>
+    
   </div>
 
   <script>
@@ -409,14 +334,16 @@
     const lightCellPx = 7;
     const darkCellPx = 7;
     let currentTheme = 'light';
+    let pixelRatio = 1;
     function resizeCanvas(){
       ctx.setTransform(1, 0, 0, 1, 0, 0);
-      c.width = window.innerWidth * 2;
-      c.height = window.innerHeight * 2;
-      ctx.scale(2, 2);
+      pixelRatio = currentTheme === 'dark' ? 2 : Math.min(window.devicePixelRatio || 1, 2);
+      c.width = Math.round(window.innerWidth * pixelRatio);
+      c.height = Math.round(H() * pixelRatio);
+      ctx.scale(pixelRatio, pixelRatio);
     }
-    const W = () => c.width / 2;
-    const H = () => c.height / 2;
+    const W = () => window.innerWidth;
+    const H = () => currentTheme === 'dark' ? window.innerHeight : Math.min(window.innerHeight, 900);
     let darkTick = 0;
     const darkSeed = Array.from({ length: 8 }, () => 0.5 + Math.random() * 1.5);
     const darkAttractors = Array.from({ length: 3 }, () => ({
@@ -638,14 +565,7 @@
       }
     }
     function clearLight(){
-      const w = W(), h = H();
-      const g = ctx.createRadialGradient(w*.48,h*.34,0,w*.50,h*.56,Math.max(w,h)*.98);
-      g.addColorStop(0,'#b3c7d4');
-      g.addColorStop(.30,'#abc2d1');
-      g.addColorStop(.62,'#9eb8ca');
-      g.addColorStop(1,'#93aec3');
-      ctx.fillStyle = g;
-      ctx.fillRect(0,0,w,h);
+      ctx.clearRect(0, 0, W(), H());
     }
     function accumulate(gx,gy,amount){
       if(gx < 1 || gx >= cols-1 || gy < 1 || gy >= rows-1) return;
@@ -679,7 +599,7 @@
     }
     function mapToScreen(x,y){
       const m = Math.min(W(), H());
-      return [W()*0.5 + x*m*0.62, H()*0.56 + y*m*0.62];
+      return [W()*0.78 + x*m*0.62, H()*0.50 + y*m*0.62];
     }
     function drawSegment(seg,t){
       const dx = seg.x2 - seg.x1;
@@ -877,6 +797,8 @@
     function applyTheme(theme, persist=true){
       currentTheme = theme === 'dark' ? 'dark' : 'light';
       document.body.setAttribute('data-theme', currentTheme);
+      resizeAll();
+      document.querySelector('meta[name="theme-color"]').content = currentTheme === 'dark' ? '#0a0a0a' : '#afc5d4';
       const lightBtn = document.getElementById('themeLight');
       const darkBtn = document.getElementById('themeDark');
       const isLight = currentTheme === 'light';
@@ -889,23 +811,50 @@
       if(darkDensity.length) darkDensity.fill(0);
       if(persist){
         try { localStorage.setItem('restrictedTheme', currentTheme); } catch(e){}
+        renderStaticFrame();
       }
     }
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function loop(){
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animationFrame = null;
+    let lastFrameTime = -Infinity;
+    function drawFrame(){
       if(currentTheme === 'dark') drawDarkFrame();
       else drawLightFrame();
-      if (!reduceMotion) requestAnimationFrame(loop);
     }
-    window.addEventListener('resize', resizeAll);
+    function renderStaticFrame(){
+      // Build the density of the artwork without animating for reduced-motion visitors.
+      for(let i = 0; i < (motionPreference.matches ? 12 : 1); i++) drawFrame();
+    }
+    function loop(timestamp){
+      animationFrame = null;
+      if(motionPreference.matches || document.hidden) return;
+      if(currentTheme === 'dark' || timestamp - lastFrameTime >= 1000 / 30){
+        drawFrame();
+        lastFrameTime = timestamp;
+      }
+      animationFrame = requestAnimationFrame(loop);
+    }
+    function syncAnimation(){
+      if(animationFrame !== null) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      if(document.hidden) return;
+      renderStaticFrame();
+      lastFrameTime = -Infinity;
+      if(!motionPreference.matches) animationFrame = requestAnimationFrame(loop);
+    }
+    window.addEventListener('resize', () => {
+      resizeAll();
+      renderStaticFrame();
+    });
+    motionPreference.addEventListener('change', syncAnimation);
+    document.addEventListener('visibilitychange', syncAnimation);
     document.getElementById('themeLight').addEventListener('click', () => applyTheme('light'));
     document.getElementById('themeDark').addEventListener('click', () => applyTheme('dark'));
     const savedTheme = (() => {
       try { return localStorage.getItem('restrictedTheme'); } catch(e) { return null; }
     })();
-    resizeAll();
     applyTheme(savedTheme === 'light' ? 'light' : 'dark', false);
-    loop();
+    syncAnimation();
   </script>
 </body>
 </html>
