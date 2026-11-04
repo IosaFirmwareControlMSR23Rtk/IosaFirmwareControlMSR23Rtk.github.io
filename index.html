@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Franco Belman — restricted.systems</title>
-  <meta name="description" content="Vulnerability research and exploit development by Franco Belman." />
+  <meta name="description" content="Vulnerability research and exploit development by Franco Belman. Research, security advisories, and contact information." />
   <meta property="og:title" content="Franco Belman — restricted.systems" />
   <meta property="og:description" content="Vulnerability research and exploit development. Selected research and security advisories." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Ctext x='32' y='42' fill='%23ededed' font-family='monospace' font-size='30' text-anchor='middle'%3Efb%3C/text%3E%3C/svg%3E" />
 <style>
     :root {
       color-scheme: light;
@@ -89,7 +88,7 @@
       max-width: 1400px; margin-inline: auto;
       padding: 36px clamp(24px, 5vw, 72px) 32px;
     }
-    .topbar { display: flex; align-items: center; justify-content: flex-end; gap: 24px; margin-bottom: 58px; }
+    .topbar { position: absolute; top: 36px; right: clamp(24px, 5vw, 72px); display: flex; align-items: center; justify-content: flex-end; gap: 24px; }
     .theme-toggle { display: flex; align-items: center; gap: 4px; }
     .theme-btn {
       appearance: none; border: 1px solid transparent; background: transparent;
@@ -159,7 +158,7 @@
     .advisory-table a:hover { text-decoration: underline; text-underline-offset: 4px; }
     @media (max-width: 700px) {
       .content { padding: 22px 24px 28px; }
-      .topbar { margin-bottom: 43px; }
+      .topbar { top: 22px; right: 24px; }
       .panel-hero > p { font-size: 16px; max-width: 330px; }
       .profile-meta { gap: 24px 36px; margin-top: 27px; }
       .research-section { margin-top: 43px; }
